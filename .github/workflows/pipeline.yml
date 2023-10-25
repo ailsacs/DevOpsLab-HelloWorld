@@ -53,21 +53,63 @@ jobs:
           python test.py
 
 
-  deploy:
-    needs: tests
-    runs-on: ubuntu-20.04
+#  deploy:
+#    needs: tests
+#    runs-on: ubuntu-20.04
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Set up Python 3.9
+#        uses: actions/setup-python@v2
+#        with:
+#          python-version: 3.9
+#
+#      - name: deploy into heroku
+#        uses: akhileshns/heroku-deploy@v3.12.12
+#        with:
+#          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+#          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+#          heroku_email: ${{secrets.HEROKU_USER_EMAIL}}
+          
 
-    steps:
-      - uses: actions/checkout@v2
+deploy:
+  needs: tests
+  runs-on: ubuntu-latest
 
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: deploy into heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-          heroku_email: ${{secrets.HEROKU_USER_EMAIL}}
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install AWS CLI
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y awscli
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: us-east-1b  # Substitua pelo seu região
+
+    - name: Check if directory exists
+      run: |
+        if [ -d "/home/admin/DevOpsLab-HelloWorld" ]; then
+          echo "Directory already exists"
+        else
+          git clone https://github.com/ailsacs/DevOpsLab-HelloWorld.git /home/admin/DevOpsLab-HelloWorld
+        fi
+
+    - name: Deploy to AWS EC2
+      run: |
+        # Clone o repositório do GitHub diretamente na instância EC2
+        git clone https://github.com/ailsacs/DevOpsLab-HelloWorld.git /home/admin/DevOpsLab-HelloWorld
+        
+        # Realize quaisquer outras etapas de implantação necessárias
+
+      env:
+        AWS_DEFAULT_REGION: us-east-1b  # Substitua pelo seu região
+
