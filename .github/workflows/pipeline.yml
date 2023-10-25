@@ -103,13 +103,13 @@ deploy:
           git clone https://github.com/ailsacs/DevOpsLab-HelloWorld.git /home/admin/DevOpsLab-HelloWorld
         fi
 
-    - name: Deploy to AWS EC2
-      run: |
-        # Clone o repositório do GitHub diretamente na instância EC2
-        git clone https://github.com/ailsacs/DevOpsLab-HelloWorld.git /home/admin/DevOpsLab-HelloWorld
-        
-        # Realize quaisquer outras etapas de implantação necessárias
-
-      env:
-        AWS_DEFAULT_REGION: us-east-1b  # Substitua pelo seu região
+#    - name: Deploy to AWS EC2
+#      run: |
+#        # Clone o repositório do GitHub diretamente na instância EC2
+#        git clone https://github.com/ailsacs/DevOpsLab-HelloWorld.git /home/admin/DevOpsLab-HelloWorld
+#        
+#        # Realize quaisquer outras etapas de implantação necessárias
+#
+#      env:
+#        AWS_DEFAULT_REGION: us-east-1b  # Substitua pelo seu região
 
