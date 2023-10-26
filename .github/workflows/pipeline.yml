@@ -10,10 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Python 3.9.1
+      - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9.1
+          python-version: 3.9
 
       - name: Install dependencies
         run: |
@@ -32,11 +32,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-<<<<<<< HEAD
-        python-version: 3.9.1
-=======
-        python-version: [3.9.1]
->>>>>>> refs/remotes/origin/main
+        python-version: 3.9
 
     steps:
       - uses: actions/checkout@v2
@@ -85,10 +81,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
   
-      - name: Set up Python 3.9.1
+      - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9.1
+          python-version: 3.9
   
       - name: Install AWS CLI
         run: |
@@ -97,7 +93,6 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-<<<<<<< HEAD
           AWS_DEFAULT_REGION: us-east-1b  # Substitua pelo seu região
   
 #      - name: Check if directory exists
@@ -111,21 +106,6 @@ jobs:
       - name: Deploy to AWS EC2
         run: |
           # Navegue até o diretório do aplicativo
-=======
-          AWS_DEFAULT_REGION: us-east-1b  # Substitua pelo seu regiÃ£o
-  
-      - name: Check if directory exists
-        run: |
-          if [ -d "/home/admin/DevOpsLab-HelloWorld" ]; then
-            echo "Directory already exists"
-          else
-            git clone https://github.com/ailsacs/DevOpsLab-HelloWorld.git /home/admin/DevOpsLab-HelloWorld
-          fi
-  
-      - name: Deploy to AWS EC2
-        run: |
-          # Navegue atÃ© o diretÃ³rio do aplicativo
->>>>>>> refs/remotes/origin/main
           cd /home/admin/DevOpsLab-HelloWorld
       
           # Execute o aplicativo Python (substitua "app.py" pelo nome do seu arquivo)
@@ -134,9 +114,5 @@ jobs:
           # Inicie um servidor web para disponibilizar o aplicativo
           nohup python -m http.server 80 &
         env:
-<<<<<<< HEAD
           AWS_DEFAULT_REGION: us-east-1b  # Substitua pelo seu região
-=======
-          AWS_DEFAULT_REGION: us-east-1b  # Substitua pelo seu regiÃ£o
->>>>>>> refs/remotes/origin/main
   
