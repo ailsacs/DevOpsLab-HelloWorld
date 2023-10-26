@@ -75,7 +75,7 @@ jobs:
 
   deploy:
     needs: tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
   
     steps:
       - name: Checkout code
@@ -93,7 +93,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: us-east-1b  # Substitua pelo seu regi„o
+          AWS_DEFAULT_REGION: us-east-1b  # Substitua pelo seu regi√£o
   
       - name: Check if directory exists
         run: |
@@ -103,13 +103,16 @@ jobs:
             git clone https://github.com/ailsacs/DevOpsLab-HelloWorld.git /home/admin/DevOpsLab-HelloWorld
           fi
   
-  #    - name: Deploy to AWS EC2
-  #      run: |
-  #        # Clone o repositÛrio do GitHub diretamente na inst‚ncia EC2
-  #        git clone https://github.com/ailsacs/DevOpsLab-HelloWorld.git /home/admin/DevOpsLab-HelloWorld
-  #        
-  #        # Realize quaisquer outras etapas de implantaÁ„o necess·rias
-  #
-  #      env:
-  #        AWS_DEFAULT_REGION: us-east-1b  # Substitua pelo seu regi„o
+      - name: Deploy to AWS EC2
+        run: |
+          # Navegue at√© o diret√≥rio do aplicativo
+          cd /home/admin/DevOpsLab-HelloWorld
+      
+          # Execute o aplicativo Python (substitua "app.py" pelo nome do seu arquivo)
+          python app.py &
+      
+          # Inicie um servidor web para disponibilizar o aplicativo
+          nohup python -m http.server 80 &
+        env:
+          AWS_DEFAULT_REGION: us-east-1b  # Substitua pelo seu regi√£o
   
