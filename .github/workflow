@@ -18,7 +18,7 @@ jobs:
       - name: Clear Python Cache
         run: |
           python -m pip cache purge
-        working-directory: /home/runner/work/DevOpsLab-HelloWorld  # Substitua pelo caminho correto
+          working-directory: /home/runner/work/DevOpsLab-HelloWorld  # Substitua pelo caminho correto
 
 
       - name: Install dependencies
