@@ -75,16 +75,27 @@ jobs:
 
   deploy:
     needs: tests
+<<<<<<< HEAD
     runs-on: ubuntu-20.04
+=======
+    runs-on: ubuntu-latest
+>>>>>>> refs/remotes/origin/main
   
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
   
+<<<<<<< HEAD
       - name: Set up Python 3.9.1
         uses: actions/setup-python@v2
         with:
           python-version: 3.9.1
+=======
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+>>>>>>> refs/remotes/origin/main
   
       - name: Install AWS CLI
         run: |
@@ -95,6 +106,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-1b  # Substitua pelo seu região
   
+<<<<<<< HEAD
 #      - name: Check if directory exists
 #        run: |
 #          if [ -d "/home/admin/" ]; then
@@ -115,4 +127,23 @@ jobs:
           nohup python -m http.server 80 &
         env:
           AWS_DEFAULT_REGION: us-east-1b  # Substitua pelo seu região
+=======
+      - name: Check if directory exists
+        run: |
+          if [ -d "/home/admin/DevOpsLab-HelloWorld" ]; then
+            echo "Directory already exists"
+          else
+            git clone https://github.com/ailsacs/DevOpsLab-HelloWorld.git /home/admin/DevOpsLab-HelloWorld
+          fi
+  
+  #    - name: Deploy to AWS EC2
+  #      run: |
+  #        # Clone o repositório do GitHub diretamente na instância EC2
+  #        git clone https://github.com/ailsacs/DevOpsLab-HelloWorld.git /home/admin/DevOpsLab-HelloWorld
+  #        
+  #        # Realize quaisquer outras etapas de implantação necessárias
+  #
+  #      env:
+  #        AWS_DEFAULT_REGION: us-east-1b  # Substitua pelo seu região
+>>>>>>> refs/remotes/origin/main
   
