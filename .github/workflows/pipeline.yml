@@ -15,10 +15,10 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Clear Python Cache
-        run: |
-          python -m pip cache purge
-          working-directory: /home/runner/work/DevOpsLab-HelloWorld  # Substitua pelo caminho correto
+#      - name: Clear Python Cache
+#        run: |
+#          python -m pip cache purge
+#          working-directory: /home/runner/work/DevOpsLab-HelloWorld  # Substitua pelo caminho correto
 
 
       - name: Install dependencies
